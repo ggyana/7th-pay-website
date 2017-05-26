@@ -1,0 +1,278 @@
+Sub Button91_Click()
+Dim x As Workbook
+Dim y As Workbook
+Dim Path As String
+Dim filename As String
+
+''''select customer file
+Dim strFileToOpen As Variant
+strFileToOpen = Application.GetOpenFilename _
+(Title:="Please choose a file to open", _
+FileFilter:="Excel Files *.xls* (*.xls*),")
+If strFileToOpen = False Then
+MsgBox "No file selected.", vbExclamation, "Sorry!"
+Exit Sub
+Else
+Set x = Workbooks.Open(filename:=strFileToOpen)
+End If
+''''select customer filed
+
+
+
+
+On Error Resume Next
+Set y = Workbooks("Ver 36 Master 7th pay_cg.xls")
+On Error GoTo 0
+If y Is Nothing Then
+    Set y = Workbooks.Open("C:\DataFile\Ver 37 Master 7th pay_cg.xls")
+End If
+
+''Now, copy what you want from x:
+x.Sheets(1).Range("D2:AB29").Copy
+
+''Now, paste to y worksheet:
+y.Sheets("input data ").Range("F4:AE31").PasteSpecial Paste:=xlPasteValues
+'y.Sheets("input data ").Range("F4:AE30").Resize(, 5).Select
+
+ Application.CutCopyMode = False
+ Application.ScreenUpdating = False
+
+x.Save
+x.Close
+
+y.Save
+'y.Clos
+End Sub
+Sub inputdata_Button87_Click()
+Dim startofcopy, endofcopy, startofcopyfrm, chckcopy As String
+Dim i, C, ch As Integer
+Dim sheet1, shet2, sheet3, sheet4 As String
+
+startofcopy = Sheets("input data ").Range("B5")
+endofcopy = Sheets("input data ").Range("B6")
+i = 5
+C = 6
+ch = 6
+
+While Sheets("input data ").Cells(4, i).Value <> endofcopy
+chckcopy = Sheets("input data ").Cells(4, ch)
+If chckcopy = startofcopy Then
+
+Sheets("input data ").Columns(ch).Select
+Selection.Copy
+Columns(5).Select
+    ActiveSheet.Paste
+Columns(ch).Select
+Application.CutCopyMode = False
+
+
+ Sheets("Arears").Select
+
+ Range("bw1:cl42").Select
+ Selection.PrintOut Copies:=1, Collate:=True
+ 
+ Sheets("Option").Select
+ Range("b2:o44").Select
+ Selection.PrintOut Copies:=1, Collate:=True
+
+ Sheets("Fixation").Select
+ Range("h2:n34").Select
+ Selection.PrintOut Copies:=1, Collate:=True
+
+ Sheets("input data ").Select
+ Sheets("input data ").Range("e4:e20").Clear
+ 
+ startofcopy = startofcopy + 1
+End If
+i = i + 1
+
+ch = ch + 1
+
+
+
+
+Wend
+End Sub
+Sub Button88_Click()
+Dim startofcopy, endofcopy, startofcopyfrm, chckcopy As String
+Dim i, C, ch As Integer
+Dim sheet1, shet2, sheet3, sheet4 As String
+
+startofcopy = Sheets("input data ").Range("B5")
+endofcopy = Sheets("input data ").Range("B6")
+i = 5
+C = 6
+ch = 6
+
+While Sheets("input data ").Cells(4, i).Value <> endofcopy
+chckcopy = Sheets("input data ").Cells(4, ch)
+If chckcopy = startofcopy Then
+
+Sheets("input data ").Columns(ch).Select
+Selection.Copy
+Columns(5).Select
+    ActiveSheet.Paste
+Columns(ch).Select
+Application.CutCopyMode = False
+''Selection.Clear ''Shift:=xlToLeft
+
+''sheet1 = "output 3 part "
+''sheet2 = "option"
+''sheet3 = "fixation"
+
+ Sheets("Arears").Select
+''ActiveWindow.SmallScroll Down:=-21
+ Range("bw1:cl42").Select
+ Selection.PrintOut Copies:=1, Collate:=True
+
+
+ Sheets("Fixation").Select
+''ActiveWindow.SmallScroll Down:=-21
+ Range("H2:N34").Select
+ Selection.PrintOut Copies:=1, Collate:=True
+
+ Sheets("input data ").Select
+Sheets("input data ").Range("e4:e20").Clear
+startofcopy = startofcopy + 1
+End If
+i = i + 1
+
+ch = ch + 1
+
+
+''    ActiveWindow.SmallScroll Down:=36
+''    Range("A142:AN175").Select
+''    Selection.PrintOut Copies:=1, Collate:=True
+''    Sheets("input").Select
+
+
+
+
+Wend
+''Next i
+ ''Sleep (10000) ' delay 1000=1 second
+
+End Sub
+Sub Button89_Click()
+Dim startofcopy, endofcopy, startofcopyfrm, chckcopy As String
+Dim i, C, ch As Integer
+Dim sheet1, shet2, sheet3, sheet4 As String
+
+startofcopy = Sheets("input data ").Range("B5")
+endofcopy = Sheets("input data ").Range("B6")
+i = 5
+C = 6
+ch = 6
+
+While Sheets("input data ").Cells(4, i).Value <> endofcopy
+chckcopy = Sheets("input data ").Cells(4, ch)
+If chckcopy = startofcopy Then
+
+Sheets("input data ").Columns(ch).Select
+Selection.Copy
+Columns(5).Select
+    ActiveSheet.Paste
+Columns(ch).Select
+Application.CutCopyMode = False
+''Selection.Clear ''Shift:=xlToLeft
+
+''sheet1 = "output 3 part "
+''sheet2 = "option"
+''sheet3 = "fixation"
+
+ Sheets("Arears").Select
+''ActiveWindow.SmallScroll Down:=-21
+ Range("bw1:cl42").Select
+ Selection.PrintOut Copies:=1, Collate:=True
+ Sheets("Option").Select
+''ActiveWindow.SmallScroll Down:=-21
+ Range("B2:O44").Select
+ Selection.PrintOut Copies:=1, Collate:=True
+
+
+
+ Sheets("input data ").Select
+Sheets("input data ").Range("e4:e20").Clear
+startofcopy = startofcopy + 1
+End If
+i = i + 1
+
+ch = ch + 1
+
+
+''    ActiveWindow.SmallScroll Down:=36
+''    Range("A142:AN175").Select
+''    Selection.PrintOut Copies:=1, Collate:=True
+''    Sheets("input").Select
+
+
+
+
+Wend
+''Next i
+ ''Sleep (10000) ' delay 1000=1 second
+
+''End Sub
+End Sub
+Sub Button90_Click()
+Dim startofcopy, endofcopy, startofcopyfrm, chckcopy As String
+Dim i, C, ch As Integer
+Dim sheet1, shet2, sheet3, sheet4 As String
+
+startofcopy = Sheets("input data ").Range("B5")
+endofcopy = Sheets("input data ").Range("B6")
+i = 5
+C = 6
+ch = 6
+
+While Sheets("input data ").Cells(4, i).Value <> endofcopy
+chckcopy = Sheets("input data ").Cells(4, ch)
+If chckcopy = startofcopy Then
+
+Sheets("input data ").Columns(ch).Select
+Selection.Copy
+Columns(5).Select
+    ActiveSheet.Paste
+Columns(ch).Select
+Application.CutCopyMode = False
+''Selection.Clear ''Shift:=xlToLeft
+
+''sheet1 = "output 3 part "
+''sheet2 = "option"
+''sheet3 = "fixation"
+
+
+ Sheets("Option").Select
+''ActiveWindow.SmallScroll Down:=-21
+ Range("B2:O44").Select
+ Selection.PrintOut Copies:=1, Collate:=True
+
+ Sheets("Fixation").Select
+''ActiveWindow.SmallScroll Down:=-21
+ Range("H2:N34").Select
+ Selection.PrintOut Copies:=1, Collate:=True
+
+ Sheets("input data ").Select
+Sheets("input data ").Range("e4:e20").Clear
+startofcopy = startofcopy + 1
+End If
+i = i + 1
+
+ch = ch + 1
+
+
+''    ActiveWindow.SmallScroll Down:=36
+''    Range("A142:AN175").Select
+''    Selection.PrintOut Copies:=1, Collate:=True
+''    Sheets("input").Select
+
+
+
+
+Wend
+''Next i
+ ''Sleep (10000) ' delay 1000=1 second
+
+''End Sub
+
+End Sub
